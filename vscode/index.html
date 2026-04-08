@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | Links</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --accent-color: #38bdf8;
+            --hover-color: #0ea5e9;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-color);
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        p {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .link-card {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 15px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: transform 0.2s, background-color 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .link-card:hover {
+            transform: scale(1.03);
+            background-color: var(--accent-color);
+            color: #000;
+        }
+
+        /* Specific colors on hover (Optional) */
+        .instagram:hover { background-color: #E1306C; color: white; }
+        .discord:hover { background-color: #5865F2; color: white; }
+        .whatsapp:hover { background-color: #25D366; color: white; }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="images/dyegoou.webp" alt="Profile Picture" class="profile-img">
+        
+        <h1>@dyegoou</h1>
+        <p>Welcome to my profile! Connect with me below.</p>
+
+        <div class="links">
+            <a href="https://instagram.com/dyegoou" class="link-card instagram" target="_blank">Instagram</a>
+            <a href="https://discord.gg/txrp2" class="link-card discord" target="_blank">Discord Server</a>
+            <a href="https://wa.me/11932078062" class="link-card whatsapp" target="_blank">WhatsApp</a>
+        </div>
+    </div>
+
+</body>
+</html>
