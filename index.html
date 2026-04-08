@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@dyegoou | Links</title>
     <link rel="icon" type="image/png" href="images/dyegoou.webp">
     <style>
-        /* Variáveis de Cores */
+        /* Variáveis e Reset */
         :root {
             --bg-gradient: linear-gradient(-45deg, #0f172a, #1e293b, #334155, #1e1b4b);
             --glass-bg: rgba(255, 255, 255, 0.05);
@@ -22,20 +22,8 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Animação de Surgimento */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         body {
-            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background: var(--bg-gradient);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
@@ -46,22 +34,24 @@
             min-height: 100vh;
             margin: 0;
             padding: 20px;
-            overflow: hidden; /* Evita scroll desnecessário */
+            overflow-x: hidden;
         }
 
+        /* Container Principal */
         .container {
             width: 100%;
             max-width: 380px;
             text-align: center;
-            animation: fadeInUp 0.8s ease-out;
             backdrop-filter: blur(10px);
-            padding: 30px 20px;
-            border-radius: 24px;
+            -webkit-backdrop-filter: blur(10px);
+            padding: 40px 25px;
+            border-radius: 28px;
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
+        /* Imagem de Perfil */
         .profile-img {
             width: 110px;
             height: 110px;
@@ -69,27 +59,28 @@
             border: 3px solid var(--accent-color);
             margin-bottom: 20px;
             object-fit: cover;
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
-            transition: transform 0.3s ease;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
         }
 
         .profile-img:hover {
-            transform: scale(1.05) rotate(5deg);
+            transform: scale(1.1) rotate(3deg);
         }
 
         h1 {
             font-size: 1.6rem;
             margin: 0;
-            letter-spacing: -0.5px;
+            font-weight: 700;
         }
 
         p {
             font-size: 0.95rem;
             color: #94a3b8;
-            margin-top: 8px;
-            margin-bottom: 35px;
+            margin: 8px 0 35px 0;
         }
 
+        /* Seção de Links */
         .links {
             display: flex;
             flex-direction: column;
@@ -102,52 +93,126 @@
             text-decoration: none;
             padding: 16px;
             border-radius: 16px;
-            font-weight: 500;
-            font-size: 1rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 600;
             border: 1px solid var(--glass-border);
-            position: relative;
-            overflow: hidden;
+            transition: all 0.3s ease;
         }
 
-        /* Efeito de brilho ao passar o mouse */
         .link-card:hover {
             transform: translateY(-3px);
             background: rgba(255, 255, 255, 0.1);
-            border-color: var(--accent-color);
-            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
-        /* Cores específicas no Hover com brilho (glow) */
-        .instagram:hover { 
-            box-shadow: 0 0 15px rgba(225, 48, 108, 0.4);
-            background: #E1306C; 
-        }
-        .discord:hover { 
-            box-shadow: 0 0 15px rgba(88, 101, 242, 0.4);
-            background: #5865F2; 
-        }
-        .whatsapp:hover { 
-            box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
-            background: #25D366; 
+        /* Cores no Hover */
+        .instagram:hover { background: #E1306C; box-shadow: 0 0 20px rgba(225, 48, 108, 0.4); }
+        .discord:hover { background: #5865F2; box-shadow: 0 0 20px rgba(88, 101, 242, 0.4); }
+        .whatsapp:hover { background: #25D366; box-shadow: 0 0 20px rgba(37, 211, 102, 0.4); }
+
+        /* --- LIGHTBOX (IMAGEM EXPANDIDA) --- */
+        .image-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Fundo semi-transparente */
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(15px); /* Desfoque do fundo do site */
+            -webkit-backdrop-filter: blur(15px);
         }
 
+        .expanded-img {
+            max-width: 85%;
+            max-height: 75%;
+            border-radius: 24px;
+            border: 2px solid var(--glass-border);
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            transform: scale(0.7);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border: 1px solid var(--glass-border);
+            transition: 0.3s;
+            user-select: none;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
     </style>
 </head>
 <body>
 
+    <div class="image-overlay" id="overlay">
+        <div class="close-btn" id="closeBtn">&times;</div>
+        <img src="images/dyegoou.webp" class="expanded-img" id="fullImg" alt="Foto Ampliada">
+    </div>
+
     <div class="container">
-        <img src="images/dyegoou.webp" alt="Dyegoou" class="profile-img">
+        <img src="images/dyegoou.webp" alt="Dyegoou" class="profile-img" id="profilePic">
         
         <h1>@dyegoou</h1>
-        <p>Victoria me ama kkk</p>
+        <p>Desenvolvedor & Criador</p>
 
         <div class="links">
             <a href="https://instagram.com/dyegoou" class="link-card instagram" target="_blank">Instagram</a>
             <a href="https://discord.gg/txrp2" class="link-card discord" target="_blank">Comunidade Discord</a>
-            <a href="https://wa.me/11932078062" class="link-card whatsapp" target="_blank">Falar no WhatsApp</a>
+            <a href="https://wa.me/11932078062" class="link-card whatsapp" target="_blank">WhatsApp</a>
         </div>
     </div>
+
+    <script>
+        const profilePic = document.getElementById('profilePic');
+        const overlay = document.getElementById('overlay');
+        const closeBtn = document.getElementById('closeBtn');
+        const fullImg = document.getElementById('fullImg');
+
+        // Função para abrir a foto
+        profilePic.addEventListener('click', () => {
+            overlay.style.display = 'flex';
+            // Pequeno delay para a animação de escala funcionar
+            setTimeout(() => {
+                fullImg.style.transform = 'scale(1)';
+            }, 10);
+        });
+
+        // Função para fechar a foto
+        function closeLightbox() {
+            fullImg.style.transform = 'scale(0.7)';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 300);
+        }
+
+        // Fechar no botão X
+        closeBtn.addEventListener('click', closeLightbox);
+
+        // Fechar ao clicar em qualquer lugar fora da imagem
+        overlay.addEventListener('click', (e) => {
+            if (e.target !== fullImg) {
+                closeLightbox();
+            }
+        });
+    </script>
 
 </body>
 </html>
