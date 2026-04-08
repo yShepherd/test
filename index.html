@@ -1,21 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile | Links</title>
+    <title>@dyegoou | Links</title>
     <style>
+        /* Variáveis de Cores */
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
+            --bg-gradient: linear-gradient(-45deg, #0f172a, #1e293b, #334155, #1e1b4b);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
             --text-color: #f8fafc;
             --accent-color: #38bdf8;
-            --hover-color: #0ea5e9;
+        }
+
+        /* Animação do Fundo */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Animação de Surgimento */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg-gradient);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             color: var(--text-color);
             display: flex;
             justify-content: center;
@@ -23,76 +45,106 @@
             min-height: 100vh;
             margin: 0;
             padding: 20px;
+            overflow: hidden; /* Evita scroll desnecessário */
         }
 
         .container {
             width: 100%;
-            max-width: 400px;
+            max-width: 380px;
             text-align: center;
+            animation: fadeInUp 0.8s ease-out;
+            backdrop-filter: blur(10px);
+            padding: 30px 20px;
+            border-radius: 24px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
         .profile-img {
-            width: 100px;
-            height: 100px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
             border: 3px solid var(--accent-color);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             object-fit: cover;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05) rotate(5deg);
         }
 
         h1 {
-            font-size: 1.5rem;
-            margin-bottom: 5px;
+            font-size: 1.6rem;
+            margin: 0;
+            letter-spacing: -0.5px;
         }
 
         p {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: #94a3b8;
-            margin-bottom: 30px;
+            margin-top: 8px;
+            margin-bottom: 35px;
         }
 
         .links {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 16px;
         }
 
         .link-card {
-            background-color: var(--card-bg);
+            background: var(--glass-bg);
             color: var(--text-color);
             text-decoration: none;
-            padding: 15px;
-            border-radius: 12px;
-            font-weight: 600;
-            transition: transform 0.2s, background-color 0.2s;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 16px;
+            border-radius: 16px;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
         }
 
+        /* Efeito de brilho ao passar o mouse */
         .link-card:hover {
-            transform: scale(1.03);
-            background-color: var(--accent-color);
-            color: #000;
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.3);
         }
 
-        /* Specific colors on hover (Optional) */
-        .instagram:hover { background-color: #E1306C; color: white; }
-        .discord:hover { background-color: #5865F2; color: white; }
-        .whatsapp:hover { background-color: #25D366; color: white; }
+        /* Cores específicas no Hover com brilho (glow) */
+        .instagram:hover { 
+            box-shadow: 0 0 15px rgba(225, 48, 108, 0.4);
+            background: #E1306C; 
+        }
+        .discord:hover { 
+            box-shadow: 0 0 15px rgba(88, 101, 242, 0.4);
+            background: #5865F2; 
+        }
+        .whatsapp:hover { 
+            box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
+            background: #25D366; 
+        }
 
     </style>
 </head>
 <body>
 
     <div class="container">
-        <img src="images/dyegoou.webp" alt="Profile Picture" class="profile-img">
+        <img src="images/dyegoou.webp" alt="Dyegoou" class="profile-img">
         
         <h1>@dyegoou</h1>
-        <p>Welcome to my profile! Connect with me below.</p>
+        <p>Desenvolvedor & Criador</p>
 
         <div class="links">
             <a href="https://instagram.com/dyegoou" class="link-card instagram" target="_blank">Instagram</a>
-            <a href="https://discord.gg/txrp2" class="link-card discord" target="_blank">Discord Server</a>
-            <a href="https://wa.me/11932078062" class="link-card whatsapp" target="_blank">WhatsApp</a>
+            <a href="https://discord.gg/txrp2" class="link-card discord" target="_blank">Comunidade Discord</a>
+            <a href="https://wa.me/11932078062" class="link-card whatsapp" target="_blank">Falar no WhatsApp</a>
         </div>
     </div>
 
