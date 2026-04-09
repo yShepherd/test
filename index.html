@@ -15,7 +15,6 @@
 
     <a href="index.html" class="logo">Projeto 📚</a>
 
-    <!-- BOTÃO MOBILE -->
     <div class="menu-toggle" id="menuToggle">☰</div>
 
     <div class="topbar-right" id="menu">
@@ -126,13 +125,15 @@ overlay.onclick=(e)=>{
 if(e.target!==fullImg)closeLightbox();
 };
 
-/* MENU MOBILE */
+/* MENU MOBILE FUNCIONANDO */
 const toggle = document.getElementById("menuToggle");
 const menu = document.getElementById("menu");
 
-toggle.addEventListener("click", () => {
-menu.classList.toggle("active");
-});
+if (toggle && menu) {
+    toggle.addEventListener("click", () => {
+        menu.classList.toggle("active");
+    });
+}
 </script>
 
 </body>
