@@ -334,3 +334,61 @@ footer {
         padding: 18px;
     }
 }
+
+/* ===== MODAL PROJETO ===== */
+.project-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+
+    background: rgba(15,23,42,0.2);
+    backdrop-filter: blur(12px);
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+}
+
+/* CARD */
+.project-modal {
+    width: 90%;
+    max-width: 420px;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+
+    backdrop-filter: blur(20px);
+
+    box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+
+    text-align: center;
+
+    transform: translateY(40px) scale(0.9);
+    opacity: 0;
+
+    transition: 0.4s ease;
+}
+
+/* ATIVO */
+.project-overlay.active {
+    display: flex;
+}
+
+.project-overlay.active .project-modal {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+/* BOTÃO FECHAR */
+.close-project {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 28px;
+    cursor: pointer;
+}
