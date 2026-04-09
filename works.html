@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="style.css">
 <title>Works | @dyegoou</title>
-
-<</head>
+</head>
 
 <body>
 
+<!-- TOPBAR -->
 <div class="topbar">
 
     <a href="index.html" class="logo">Projeto 📚</a>
@@ -23,35 +23,44 @@
 
 </div>
 
+<!-- FUNDO -->
 <canvas id="bgCanvas"></canvas>
 <div class="glow" id="glow"></div>
 
+<!-- CONTEÚDO -->
 <div class="wrapper">
-<div class="container">
+<div class="container works-container">
 
-<h1>Meus Trabalhos</h1>
+<h1>Meus Projetos</h1>
 
-<div class="work">
+<div class="work reveal">
     <h3>Projeto 1</h3>
     <p>Descrição do seu projeto aqui.</p>
+    <a href="#" class="btn-project">Ver projeto</a>
 </div>
 
-<div class="work">
+<div class="work reveal">
     <h3>Projeto 2</h3>
     <p>Outro projeto que você desenvolveu.</p>
+    <a href="#" class="btn-project">Ver projeto</a>
 </div>
 
 </div>
 </div>
+
+<footer>© 2026 @dyegoou</footer>
 
 <script>
-/* FUNDO */
+
+/* PARTICULAS */
 const canvas = document.getElementById("bgCanvas");
 const ctx = canvas.getContext("2d");
+
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
 let particles = [];
+
 for (let i = 0; i < 120; i++) {
 particles.push({
 x: Math.random()*canvas.width,
@@ -65,34 +74,54 @@ speedY: Math.random()-0.5
 function animate(){
 ctx.fillStyle="rgba(2,6,23,0.4)";
 ctx.fillRect(0,0,canvas.width,canvas.height);
+
 particles.forEach(p=>{
 p.x+=p.speedX;
 p.y+=p.speedY;
+
 ctx.beginPath();
 ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
 ctx.fillStyle="#38bdf8";
 ctx.fill();
 });
+
 requestAnimationFrame(animate);
 }
 animate();
 
 /* GLOW */
 const glow=document.getElementById("glow");
+
 document.addEventListener("mousemove",e=>{
 glow.style.left=e.clientX+"px";
 glow.style.top=e.clientY+"px";
 });
 
-/* MENU MOBILE FUNCIONANDO */
+/* MENU MOBILE */
 const toggle = document.getElementById("menuToggle");
 const menu = document.getElementById("menu");
 
 if (toggle && menu) {
-    toggle.addEventListener("click", () => {
-        menu.classList.toggle("active");
+toggle.addEventListener("click", () => {
+menu.classList.toggle("active");
+});
+}
+
+/* ANIMAÇÃO AO APARECER */
+const reveals = document.querySelectorAll(".reveal");
+
+function revealOnScroll() {
+    reveals.forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < window.innerHeight - 80) {
+            el.classList.add("active");
+        }
     });
 }
+
+window.addEventListener("scroll", revealOnScroll);
+revealOnScroll();
+
 </script>
 
 </body>
