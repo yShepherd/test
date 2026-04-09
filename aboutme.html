@@ -11,11 +11,16 @@
 <body>
 
 <div class="topbar">
-    <a href="index.html">Projeto dedicação para estudos</a>
-    <div class="topbar-right">
+
+    <a href="index.html" class="logo">Projeto 📚</a>
+
+    <div class="menu-toggle" id="menuToggle">☰</div>
+
+    <div class="topbar-right" id="menu">
         <a href="aboutme.html">Sobre mim</a>
         <a href="works.html">Works</a>
     </div>
+
 </div>
 
 <canvas id="bgCanvas"></canvas>
@@ -69,6 +74,16 @@ document.addEventListener("mousemove",e=>{
 glow.style.left=e.clientX+"px";
 glow.style.top=e.clientY+"px";
 });
+
+/* MENU MOBILE FUNCIONANDO */
+const toggle = document.getElementById("menuToggle");
+const menu = document.getElementById("menu");
+
+if (toggle && menu) {
+    toggle.addEventListener("click", () => {
+        menu.classList.toggle("active");
+    });
+}
 </script>
 
 </body>
