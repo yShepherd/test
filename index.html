@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="images/dyegoou.webp" type="image/webp">
-<title>@dyegoou | Links</title>
+<title>@dyegoou | devLinks</title>
 
 <style>
 :root {
@@ -12,17 +12,25 @@
     --bg-secondary: #1e293b;
     --accent: #38bdf8;
     --text: #f8fafc;
-}
 
+}
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
     color: var(--text);
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     background: radial-gradient(circle at top, #1e293b, #020617);
 }
 
 /* ===== TOPBAR CORRIGIDA ===== */
+
+.topbar.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
 .topbar {
     position: fixed;
     top: 15px;
@@ -88,8 +96,9 @@ body {
 .wrapper {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding-top: 120px;
 }
 
 /* CARD */
@@ -171,11 +180,11 @@ body {
 
 /* FOOTER */
 footer {
-    position: fixed;
-    bottom: 10px;
-    width: 100%;
+    margin-top: 40px;
+    padding: 20px 0;
     text-align: center;
     font-size: 0.85rem;
+    color: #94a3b8
 }
 </style>
 </head>
@@ -199,7 +208,7 @@ footer {
 <img src="images/dyegoou.webp" class="profile-img" id="profilePic">
 
 <h1>@dyegoou</h1>
-<p>Vamos beber victoriaaaaaaaaaaaaaa</p>
+<p>Profile | Diego's link</p>
 
 <div class="links">
 <a href="https://instagram.com/dyegoou" class="link-card instagram">Instagram</a>
@@ -262,20 +271,23 @@ const profilePic=document.getElementById('profilePic');
 const overlay=document.getElementById('overlay');
 const closeBtn=document.getElementById('closeBtn');
 const fullImg=document.getElementById('fullImg');
+const topbar=document.querySelector('.topbar');
 
-profilePic.onclick=()=>{
-overlay.style.display='flex';
-setTimeout(()=>fullImg.style.transform='scale(1)',10);
+profilePic.onclick = () => {
+    overlay.style.display = 'flex';
+    topbar.classList.add('hidden'); // REMOVE THE TOP
+    setTimeout(() => fullImg.style.transform = 'scale(1)', 10);
 };
 
 function closeLightbox(){
-fullImg.style.transform='scale(0.7)';
-setTimeout(()=>overlay.style.display='none',300);
-}
+fullImg.style.transform = 'scale(0.7)';
+topbar.classList.remove('hidden'); // RE-ADD THE TOP
+setTimeout(() => overlay.style.display = 'none', 300);
+}  
 
 closeBtn.onclick=closeLightbox;
 overlay.onclick=(e)=>{if(e.target!==fullImg)closeLightbox();}
 </script>
 
 </body>
-</html>    
+</html>
