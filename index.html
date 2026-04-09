@@ -142,6 +142,32 @@ p { color: #94a3b8; }
     align-items: center;
 }
 
+/* IMAGE DOWNLOAD*/
+.download-btn {
+    position: absolute;
+    top: 25px;
+    right: 90px;
+
+    width: 50px;
+    height: 50px;
+
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255,255,255,0.2);
+
+    transition: 0.3s;
+}
+    
 .expanded-img {
     max-width: 85%;
     border-radius: 20px;
@@ -197,8 +223,11 @@ footer {
 </footer>
 
 <div class="image-overlay" id="overlay">
-<span class="close-btn" id="closeBtn">&times;</span>
-<img src="images/dyegoou.webp" class="expanded-img" id="fullImg">
+    <span class="close-btn" id="closeBtn">&times;</span>
+    
+    <a href="images/dyegoou.webp" download class="download-btn">⬇</a>
+
+    <img src="images/dyegoou.webp" class="expanded-img" id="fullImg">
 </div>
 
 <script>
