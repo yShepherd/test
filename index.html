@@ -1,218 +1,271 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@dyegoou | Links</title>
-    <link rel="icon" type="image/png" href="images/dyegoou.webp">
-    <style>
-        /* Variáveis e Reset */
-        :root {
-            --bg-gradient: linear-gradient(-45deg, #0f172a, #1e293b, #334155, #1e1b4b);
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --text-color: #f8fafc;
-            --accent-color: #38bdf8;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="images/dyegoou.webp" type="image/webp">
+<title>@dyegoou | Links</title>
 
-        /* Animação do Fundo */
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+<style>
+:root {
+    --bg-dark: #0f172a;
+    --bg-secondary: #1e293b;
+    --accent: #38bdf8;
+    --text: #f8fafc;
+}
 
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: var(--bg-gradient);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            color: var(--text-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            overflow-x: hidden;
-        }
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    overflow: hidden;
+    background: radial-gradient(circle at top, #1e293b, #020617);
+}
 
-        /* Container Principal */
-        .container {
-            width: 100%;
-            max-width: 380px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 40px 25px;
-            border-radius: 28px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
+/* CANVAS */
+#bgCanvas {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
 
-        /* Imagem de Perfil */
-        .profile-img {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            border: 3px solid var(--accent-color);
-            margin-bottom: 20px;
-            object-fit: cover;
-            cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
-        }
+/* GLOW DO MOUSE */
+.glow {
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(56,189,248,0.15), transparent 70%);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+}
 
-        .profile-img:hover {
-            transform: scale(1.1) rotate(3deg);
-        }
+/* CENTRALIZA */
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
-        h1 {
-            font-size: 1.6rem;
-            margin: 0;
-            font-weight: 700;
-        }
+/* CARD */
+.container {
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+    padding: 40px 25px;
+    border-radius: 28px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+}
 
-        p {
-            font-size: 0.95rem;
-            color: #94a3b8;
-            margin: 8px 0 35px 0;
-        }
+/* PERFIL */
+.profile-img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 3px solid var(--accent);
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
 
-        /* Seção de Links */
-        .links {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
+.profile-img:hover {
+    transform: scale(1.1);
+}
 
-        .link-card {
-            background: var(--glass-bg);
-            color: var(--text-color);
-            text-decoration: none;
-            padding: 16px;
-            border-radius: 16px;
-            font-weight: 600;
-            border: 1px solid var(--glass-border);
-            transition: all 0.3s ease;
-        }
+/* TEXTOS */
+h1 { margin: 0; }
+p { color: #94a3b8; }
 
-        .link-card:hover {
-            transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
+/* LINKS */
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 25px;
+}
 
-        /* Cores no Hover */
-        .instagram:hover { background: #E1306C; box-shadow: 0 0 20px rgba(225, 48, 108, 0.4); }
-        .discord:hover { background: #5865F2; box-shadow: 0 0 20px rgba(88, 101, 242, 0.4); }
-        .whatsapp:hover { background: #25D366; box-shadow: 0 0 20px rgba(37, 211, 102, 0.4); }
+.link-card {
+    padding: 16px;
+    border-radius: 15px;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: 0.3s;
+}
 
-        /* --- LIGHTBOX (IMAGEM EXPANDIDA) --- */
-        .image-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4); /* Fundo semi-transparente */
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(15px); /* Desfoque do fundo do site */
-            -webkit-backdrop-filter: blur(15px);
-        }
+.link-card:hover {
+    transform: translateY(-4px);
+}
 
-        .expanded-img {
-            max-width: 85%;
-            max-height: 75%;
-            border-radius: 24px;
-            border: 2px solid var(--glass-border);
-            box-shadow: 0 0 50px rgba(0,0,0,0.5);
-            transform: scale(0.7);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+/* CORES VIVAS */
+.instagram:hover {
+    background: linear-gradient(45deg,#E1306C,#F77737);
+    box-shadow: 0 0 20px #E1306C;
+}
 
-        .close-btn {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 30px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            border: 1px solid var(--glass-border);
-            transition: 0.3s;
-            user-select: none;
-        }
+.discord:hover {
+    background: #5865F2;
+    box-shadow: 0 0 20px #5865F2;
+}
 
-        .close-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: rotate(90deg);
-        }
-    </style>
+.whatsapp:hover {
+    background: #25D366;
+    box-shadow: 0 0 20px #25D366;
+}
+
+/* LIGHTBOX */
+.image-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+
+    /* FUNDO QUASE TRANSPARENTE */
+    background: rgba(15, 23, 42, 0.15); /* leve tom escuro elegante */
+
+    /* BLUR SUAVE */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    justify-content: center;
+    align-items: center;
+}
+
+.expanded-img {
+    max-width: 85%;
+    border-radius: 20px;
+    transform: scale(0.7);
+    transition: 0.3s;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* FOOTER */
+footer {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+</style>
 </head>
+
 <body>
 
-    <div class="image-overlay" id="overlay">
-        <div class="close-btn" id="closeBtn">&times;</div>
-        <img src="images/dyegoou.webp" class="expanded-img" id="fullImg" alt="Foto Ampliada">
-    </div>
+<canvas id="bgCanvas"></canvas>
+<div class="glow" id="glow"></div>
 
-    <div class="container">
-        <img src="images/dyegoou.webp" alt="Dyegoou" class="profile-img" id="profilePic">
-        
-        <h1>@dyegoou</h1>
-        <p>Vamos beber victoriaaaaaaaaaaaaaa</p>
+<div class="wrapper">
+<div class="container">
 
-        <div class="links">
-            <a href="https://instagram.com/dyegoou" class="link-card instagram" target="_blank">Instagram</a>
-            <a href="https://discord.gg/txrp2" class="link-card discord" target="_blank">Comunidade Discord</a>
-            <a href="https://wa.me/11932078062" class="link-card whatsapp" target="_blank">WhatsApp</a>
-        </div>
-    </div>
+<img src="images/dyegoou.webp" class="profile-img" id="profilePic">
 
-    <script>
-        const profilePic = document.getElementById('profilePic');
-        const overlay = document.getElementById('overlay');
-        const closeBtn = document.getElementById('closeBtn');
-        const fullImg = document.getElementById('fullImg');
+<h1>@dyegoou</h1>
+<p>Vamos beber victoriaaaaaaaaaaaaaa</p>
 
-        // Função para abrir a foto
-        profilePic.addEventListener('click', () => {
-            overlay.style.display = 'flex';
-            // Pequeno delay para a animação de escala funcionar
-            setTimeout(() => {
-                fullImg.style.transform = 'scale(1)';
-            }, 10);
-        });
+<div class="links">
+<a href="https://instagram.com/dyegoou" class="link-card instagram">Instagram</a>
+<a href="https://discord.gg/txrp2" class="link-card discord">Discord</a>
+<a href="https://wa.me/11932078062" class="link-card whatsapp">WhatsApp</a>
+</div>
 
-        // Função para fechar a foto
-        function closeLightbox() {
-            fullImg.style.transform = 'scale(0.7)';
-            setTimeout(() => {
-                overlay.style.display = 'none';
-            }, 300);
-        }
+</div>
+</div>
 
-        // Fechar no botão X
-        closeBtn.addEventListener('click', closeLightbox);
+<footer>
+© 2026 @dyegoou — Todos os direitos reservados
+</footer>
 
-        // Fechar ao clicar em qualquer lugar fora da imagem
-        overlay.addEventListener('click', (e) => {
-            if (e.target !== fullImg) {
-                closeLightbox();
-            }
-        });
-    </script>
+<div class="image-overlay" id="overlay">
+<span class="close-btn" id="closeBtn">&times;</span>
+<img src="images/dyegoou.webp" class="expanded-img" id="fullImg">
+</div>
+
+<script>
+/* FUNDO ESCURO COM PARTÍCULAS */
+const canvas = document.getElementById("bgCanvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+
+let particles = [];
+
+for (let i = 0; i < 150; i++) {
+    particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2,
+        speedX: Math.random() - 0.5,
+        speedY: Math.random() - 0.5
+    });
+}
+
+function animate() {
+    ctx.fillStyle = "rgba(2,6,23,0.4)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach(p => {
+        p.x += p.speedX;
+        p.y += p.speedY;
+
+        if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = "#38bdf8";
+        ctx.fill();
+    });
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+/* GLOW DO MOUSE */
+const glow = document.getElementById("glow");
+
+document.addEventListener("mousemove", e => {
+    glow.style.left = e.clientX + "px";
+    glow.style.top = e.clientY + "px";
+});
+
+/* LIGHTBOX */
+const profilePic = document.getElementById('profilePic');
+const overlay = document.getElementById('overlay');
+const closeBtn = document.getElementById('closeBtn');
+const fullImg = document.getElementById('fullImg');
+
+profilePic.onclick = () => {
+    overlay.style.display = 'flex';
+    setTimeout(() => fullImg.style.transform = 'scale(1)', 10);
+};
+
+function closeLightbox() {
+    fullImg.style.transform = 'scale(0.7)';
+    setTimeout(() => overlay.style.display = 'none', 300);
+}
+
+closeBtn.onclick = closeLightbox;
+
+overlay.onclick = (e) => {
+    if (e.target !== fullImg) closeLightbox();
+};
+</script>
 
 </body>
 </html>
