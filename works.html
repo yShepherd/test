@@ -9,50 +9,63 @@
 
 <body>
 
-<!-- TOPBAR -->
 <div class="topbar">
-
     <a href="index.html" class="logo">Projeto 📚</a>
 
     <div class="menu-toggle" id="menuToggle">☰</div>
 
-    <div class="topbar-right" id="menu">
-        <a href="aboutme.html">Sobre mim</a>
-        <a href="works.html">Works</a>
-    </div>
-
+<div class="topbar-right" id="menu">
+    <a href="index.html">Menu</a> <!-- NOVO -->
+    <a href="aboutme.html">Sobre mim</a>
+    <a href="works.html">Works</a>
+</div>
 </div>
 
-<!-- FUNDO -->
 <canvas id="bgCanvas"></canvas>
 <div class="glow" id="glow"></div>
 
-<!-- CONTEÚDO -->
 <div class="wrapper">
-<div class="container works-container">
+<div class="container">
 
-<h1>Meus Projetos</h1>
+<h1>Meus Trabalhos</h1>
 
-<div class="work reveal">
+<div class="work">
     <h3>Projeto 1</h3>
     <p>Descrição do seu projeto aqui.</p>
-    <a href="#" class="btn-project">Ver projeto</a>
+
+    <a href="#" class="btn-project open-project"
+       data-title="Projeto 1"
+       data-desc="Descrição completa do projeto 1.">
+       Ver projeto
+    </a>
 </div>
 
-<div class="work reveal">
+<div class="work">
     <h3>Projeto 2</h3>
     <p>Outro projeto que você desenvolveu.</p>
-    <a href="#" class="btn-project">Ver projeto</a>
+
+    <a href="#" class="btn-project open-project"
+       data-title="Projeto 2"
+       data-desc="Descrição completa do projeto 2.">
+       Ver projeto
+    </a>
 </div>
 
 </div>
 </div>
 
-<footer>© 2026 @dyegoou</footer>
+<!-- MODAL -->
+<div class="project-overlay" id="projectOverlay">
+    <div class="project-modal">
+        <span class="close-project" id="closeProject">&times;</span>
+
+        <h2 id="projectTitle"></h2>
+        <p id="projectDesc"></p>
+    </div>
+</div>
 
 <script>
-
-/* PARTICULAS */
+/* FUNDO */
 const canvas = document.getElementById("bgCanvas");
 const ctx = canvas.getContext("2d");
 
@@ -91,7 +104,6 @@ animate();
 
 /* GLOW */
 const glow=document.getElementById("glow");
-
 document.addEventListener("mousemove",e=>{
 glow.style.left=e.clientX+"px";
 glow.style.top=e.clientY+"px";
@@ -102,26 +114,39 @@ const toggle = document.getElementById("menuToggle");
 const menu = document.getElementById("menu");
 
 if (toggle && menu) {
-toggle.addEventListener("click", () => {
-menu.classList.toggle("active");
-});
-}
-
-/* ANIMAÇÃO AO APARECER */
-const reveals = document.querySelectorAll(".reveal");
-
-function revealOnScroll() {
-    reveals.forEach(el => {
-        const top = el.getBoundingClientRect().top;
-        if (top < window.innerHeight - 80) {
-            el.classList.add("active");
-        }
+    toggle.addEventListener("click", () => {
+        menu.classList.toggle("active");
     });
 }
 
-window.addEventListener("scroll", revealOnScroll);
-revealOnScroll();
+/* ===== MODAL PROJETO ===== */
+const openBtns = document.querySelectorAll(".open-project");
+const overlayProject = document.getElementById("projectOverlay");
+const closeProject = document.getElementById("closeProject");
 
+const title = document.getElementById("projectTitle");
+const desc = document.getElementById("projectDesc");
+
+openBtns.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        title.innerText = btn.dataset.title;
+        desc.innerText = btn.dataset.desc;
+
+        overlayProject.classList.add("active");
+    });
+});
+
+function closeModal(){
+    overlayProject.classList.remove("active");
+}
+
+closeProject.onclick = closeModal;
+
+overlayProject.onclick = (e) => {
+    if (e.target === overlayProject) closeModal();
+};
 </script>
 
 </body>
