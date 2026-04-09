@@ -6,17 +6,23 @@
 <link rel="icon" href="images/dyegoou.webp" type="image/webp">
 <link rel="stylesheet" href="style.css">
 <title>@dyegoou | devLinks</title>
-
 </head>
 
 <body>
 
+<!-- TOPBAR -->
 <div class="topbar">
-    <a href="index.html">Projeto dedicação para estudos</a>
-    <div class="topbar-right">
+
+    <a href="index.html" class="logo">Projeto 📚</a>
+
+    <!-- BOTÃO MOBILE -->
+    <div class="menu-toggle" id="menuToggle">☰</div>
+
+    <div class="topbar-right" id="menu">
         <a href="aboutme.html">Sobre mim</a>
         <a href="works.html">Works</a>
     </div>
+
 </div>
 
 <canvas id="bgCanvas"></canvas>
@@ -42,6 +48,7 @@
 
 <footer>© 2026 @dyegoou</footer>
 
+<!-- LIGHTBOX -->
 <div class="image-overlay" id="overlay">
 <span class="close-btn" id="closeBtn">&times;</span>
 <a href="images/dyegoou.webp" download class="download-btn">⬇</a>
@@ -49,13 +56,15 @@
 </div>
 
 <script>
-// SEU JS ORIGINAL (mantido)
+/* PARTICULAS */
 const canvas = document.getElementById("bgCanvas");
 const ctx = canvas.getContext("2d");
+
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
 let particles = [];
+
 for (let i = 0; i < 150; i++) {
 particles.push({
 x: Math.random()*canvas.width,
@@ -69,24 +78,30 @@ speedY: Math.random()-0.5
 function animate(){
 ctx.fillStyle="rgba(2,6,23,0.4)";
 ctx.fillRect(0,0,canvas.width,canvas.height);
+
 particles.forEach(p=>{
 p.x+=p.speedX;
 p.y+=p.speedY;
+
 ctx.beginPath();
 ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
 ctx.fillStyle="#38bdf8";
 ctx.fill();
 });
+
 requestAnimationFrame(animate);
 }
 animate();
 
+/* GLOW */
 const glow=document.getElementById("glow");
+
 document.addEventListener("mousemove",e=>{
 glow.style.left=e.clientX+"px";
 glow.style.top=e.clientY+"px";
 });
 
+/* LIGHTBOX */
 const profilePic=document.getElementById('profilePic');
 const overlay=document.getElementById('overlay');
 const closeBtn=document.getElementById('closeBtn');
@@ -94,19 +109,30 @@ const fullImg=document.getElementById('fullImg');
 const topbar=document.querySelector('.topbar');
 
 profilePic.onclick = () => {
-    overlay.style.display = 'flex';
-    topbar.classList.add('hidden'); // REMOVE THE TOP
-    setTimeout(() => fullImg.style.transform = 'scale(1)', 10);
+overlay.style.display = 'flex';
+topbar.classList.add('hidden');
+setTimeout(() => fullImg.style.transform = 'scale(1)', 10);
 };
 
 function closeLightbox(){
 fullImg.style.transform = 'scale(0.7)';
-topbar.classList.remove('hidden'); // RE-ADD THE TOP
+topbar.classList.remove('hidden');
 setTimeout(() => overlay.style.display = 'none', 300);
-}  
+}
 
 closeBtn.onclick=closeLightbox;
-overlay.onclick=(e)=>{if(e.target!==fullImg)closeLightbox();}
+
+overlay.onclick=(e)=>{
+if(e.target!==fullImg)closeLightbox();
+};
+
+/* MENU MOBILE */
+const toggle = document.getElementById("menuToggle");
+const menu = document.getElementById("menu");
+
+toggle.addEventListener("click", () => {
+menu.classList.toggle("active");
+});
 </script>
 
 </body>
